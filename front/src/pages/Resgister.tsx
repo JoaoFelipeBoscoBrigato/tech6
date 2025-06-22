@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
-import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
-import "./Register.css";
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
+import './Register.css';
 
 export default function Register() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    cpf: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    cpf: '',
+    password: '',
+    confirmPassword: '',
   });
 
-  const [erro, setErro] = useState("");
+  const [erro, setErro] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,35 +35,35 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErro("");
+    setErro('');
 
     const { name, email, cpf, password, confirmPassword } = formData;
 
     if (!name || !email || !cpf || !password || !confirmPassword) {
-      return setErro("Preencha todos os campos.");
+      return setErro('Preencha todos os campos.');
     }
 
-    if (!validarEmail(email)) return setErro("E-mail inválido.");
-    if (!validarCPF(cpf)) return setErro("CPF inválido. Use apenas números.");
+    if (!validarEmail(email)) return setErro('E-mail inválido.');
+    if (!validarCPF(cpf)) return setErro('CPF inválido. Use apenas números.');
     if (!senhaForte(password))
-      return setErro("A senha deve ter pelo menos 6 caracteres.");
+      return setErro('A senha deve ter pelo menos 6 caracteres.');
     if (password !== confirmPassword)
-      return setErro("As senhas não coincidem.");
+      return setErro('As senhas não coincidem.');
 
     try {
-      await axios.post("http://localhost:3000/users", {
+      await axios.post('http://localhost:3000/users', {
         name,
         email,
         cpf,
         password,
       });
 
-      navigate("/login");
+      navigate('/login');
     } catch (err: any) {
       if (axios.isAxiosError(err)) {
-        setErro(err.response?.data?.error || "Erro ao criar conta.");
+        setErro(err.response?.data?.error || 'Erro ao criar conta.');
       } else {
-        setErro("Erro inesperado.");
+        setErro('Erro inesperado.');
       }
     }
   };

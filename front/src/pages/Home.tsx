@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import EventCard from "../components/EventCard";
-import "./Home.css";
+import { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import EventCard from '../components/EventCard';
+import './Home.css';
 
 interface Event {
   id: number;
@@ -17,21 +17,21 @@ export default function Home() {
   const [userType, setUserType] = useState<string | null>(null);
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    const type = localStorage.getItem("userType");
+    const type = localStorage.getItem('userType');
     setUserType(type);
     fetchEvents();
   }, []);
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/events");
+      const response = await axios.get('http://localhost:3000/events');
       setEvents(response.data);
     } catch (err) {
-      setError("Erro ao carregar eventos");
+      setError('Erro ao carregar eventos');
       console.error(err);
     } finally {
       setLoading(false);
@@ -39,7 +39,7 @@ export default function Home() {
   };
 
   const handleCreateEvent = () => {
-    navigate("/criar-evento");
+    navigate('/criar-evento');
   };
 
   if (loading) {
@@ -100,7 +100,7 @@ export default function Home() {
                 Descubra os melhores eventos para você
               </p>
             </div>
-            {userType === "organizador" && (
+            {userType === 'organizador' && (
               <button
                 onClick={handleCreateEvent}
                 className="create-event-button"

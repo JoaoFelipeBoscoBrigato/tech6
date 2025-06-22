@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
-import "./EventCard.css";
-
-
+import { Link } from 'react-router-dom';
+import './EventCard.css';
 
 interface EventCardProps {
   id: number;
@@ -21,10 +19,10 @@ export default function EventCard({
   image_url,
 }: EventCardProps) {
   // Formatar a data para exibição
-  const formattedDate = new Date(date).toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
+  const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
   });
 
   return (
@@ -33,7 +31,7 @@ export default function EventCard({
         {image_url ? (
           <img
             src={
-              image_url.startsWith("http")
+              image_url.startsWith('http')
                 ? image_url
                 : `http://localhost:3000${image_url}`
             }
@@ -42,7 +40,7 @@ export default function EventCard({
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src =
-                "https://via.placeholder.com/300x200?text=Imagem+indisponível";
+                'https://via.placeholder.com/300x200?text=Imagem+indisponível';
             }}
           />
         ) : (

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./EventDetails.css";
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './EventDetails.css';
 
 interface Event {
   id: number;
@@ -22,10 +22,10 @@ export default function EventDetails() {
   const navigate = useNavigate();
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [participating, setParticipating] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const [registrationError, setRegistrationError] = useState("");
+  const [registrationError, setRegistrationError] = useState('');
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -33,9 +33,9 @@ export default function EventDetails() {
         const response = await axios.get(`http://localhost:3000/events/${id}`);
         setEvent(response.data);
       } catch (err) {
-        console.error("Erro ao carregar evento:", err);
+        console.error('Erro ao carregar evento:', err);
         setError(
-          "Erro ao carregar detalhes do evento. Por favor, tente novamente mais tarde."
+          'Erro ao carregar detalhes do evento. Por favor, tente novamente mais tarde.'
         );
       } finally {
         setLoading(false);
@@ -50,13 +50,13 @@ export default function EventDetails() {
 
     try {
       setParticipating(true);
-      setRegistrationError("");
+      setRegistrationError('');
 
       // Obter o token do localStorage
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       if (!token) {
         setRegistrationError(
-          "Você precisa estar logado para participar do evento."
+          'Você precisa estar logado para participar do evento.'
         );
         return;
       }
@@ -72,23 +72,23 @@ export default function EventDetails() {
         }
       );
 
-      alert("Inscrição realizada com sucesso!");
+      alert('Inscrição realizada com sucesso!');
       // Atualizar o estado do evento para refletir a nova inscrição
       const updatedEvent = await axios.get(
         `http://localhost:3000/events/${id}`
       );
       setEvent(updatedEvent.data);
     } catch (err: any) {
-      console.error("Erro ao participar do evento:", err);
+      console.error('Erro ao participar do evento:', err);
       if (err.response?.status === 401) {
         setRegistrationError(
-          "Você precisa estar logado para participar do evento."
+          'Você precisa estar logado para participar do evento.'
         );
       } else if (err.response?.status === 409) {
-        setRegistrationError("Você já está inscrito neste evento.");
+        setRegistrationError('Você já está inscrito neste evento.');
       } else {
         setRegistrationError(
-          "Erro ao participar do evento. Por favor, tente novamente."
+          'Erro ao participar do evento. Por favor, tente novamente.'
         );
       }
     } finally {
@@ -130,9 +130,9 @@ export default function EventDetails() {
                   d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <p>{error || "Evento não encontrado"}</p>
+              <p>{error || 'Evento não encontrado'}</p>
               <button
-                onClick={() => navigate("/home")}
+                onClick={() => navigate('/home')}
                 className="event-details-button event-details-button-primary"
               >
                 Voltar para Home
@@ -144,12 +144,12 @@ export default function EventDetails() {
     );
   }
 
-  const formattedDate = new Date(event.date).toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
+  const formattedDate = new Date(event.date).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
   // Construir a URL completa da imagem
@@ -245,8 +245,8 @@ export default function EventDetails() {
                     className="event-details-organizer-avatar"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.style.display = "none";
-                      target.nextElementSibling?.classList.remove("hidden");
+                      target.style.display = 'none';
+                      target.nextElementSibling?.classList.remove('hidden');
                     }}
                   />
                 ) : (
@@ -263,7 +263,7 @@ export default function EventDetails() {
 
           <div className="event-details-actions">
             <button
-              onClick={() => navigate("/home")}
+              onClick={() => navigate('/home')}
               className="event-details-button event-details-button-secondary"
             >
               Voltar
@@ -273,7 +273,7 @@ export default function EventDetails() {
               className="event-details-button event-details-button-primary"
               disabled={participating}
             >
-              {participating ? "Participando..." : "Participar do Evento"}
+              {participating ? 'Participando...' : 'Participar do Evento'}
             </button>
           </div>
 

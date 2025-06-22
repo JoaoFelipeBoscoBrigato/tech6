@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import EventsModel from "../models/EventsModel";
-import { authenticateToken } from "../middlewares/authMiddleware";
-import { upload } from "../middlewares/uploadMiddleware";
-import jwt from "jsonwebtoken";
+import { Request, Response } from 'express';
+import EventsModel from '../models/EventsModel';
+import { authenticateToken } from '../middlewares/authMiddleware';
+import { upload } from '../middlewares/uploadMiddleware';
+import jwt from 'jsonwebtoken';
 
 // Estender a interface Request para incluir a propriedade file
 interface MulterRequest extends Request {
@@ -14,14 +14,14 @@ interface MulterRequest extends Request {
 export const uploadEventImage = async (req: MulterRequest, res: Response) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: "Nenhuma imagem enviada." });
+      return res.status(400).json({ error: 'Nenhuma imagem enviada.' });
     }
 
     const imageUrl = `/uploads/${req.file.filename}`; // Caminho da imagem salva
 
     res.json({ imageUrl });
   } catch (error) {
-    res.status(500).json({ error: "Erro ao fazer upload da imagem." });
+    res.status(500).json({ error: 'Erro ao fazer upload da imagem.' });
   }
 };
 
@@ -32,15 +32,15 @@ export const createEvent = async (req: MulterRequest, res: Response) => {
     let image_url = null;
 
     // Verifica se o usuário está autenticado
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
-      return res.status(401).json({ error: "Token não fornecido" });
+      return res.status(401).json({ error: 'Token não fornecido' });
     }
 
     // Decodifica o token para obter o ID do organizador
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET || "segredoUltraSecreto123"
+      process.env.JWT_SECRET || 'segredoUltraSecreto123'
     ) as { id: number };
     const organizer_id = decoded.id;
 
@@ -59,8 +59,8 @@ export const createEvent = async (req: MulterRequest, res: Response) => {
 
     res.status(201).json(event);
   } catch (error) {
-    console.error("Erro ao criar evento:", error);
-    res.status(500).json({ error: "Erro ao criar evento." });
+    console.error('Erro ao criar evento:', error);
+    res.status(500).json({ error: 'Erro ao criar evento.' });
   }
 };
 
@@ -70,7 +70,7 @@ export const getAllEvents = async (req: Request, res: Response) => {
     const events = await EventsModel.findAll();
     res.json(events);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao listar eventos." });
+    res.status(500).json({ error: 'Erro ao listar eventos.' });
   }
 };
 
@@ -79,11 +79,11 @@ export const getEventById = async (req: Request, res: Response) => {
   try {
     const event = await EventsModel.findByPk(req.params.id);
     if (!event) {
-      return res.status(404).json({ error: "Evento não encontrado." });
+      return res.status(404).json({ error: 'Evento não encontrado.' });
     }
     res.json(event);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao buscar evento." });
+    res.status(500).json({ error: 'Erro ao buscar evento.' });
   }
 };
 
@@ -99,7 +99,7 @@ export const updateEvent = async (req: MulterRequest, res: Response) => {
 
     const event = await EventsModel.findByPk(req.params.id);
     if (!event) {
-      return res.status(404).json({ error: "Evento não encontrado." });
+      return res.status(404).json({ error: 'Evento não encontrado.' });
     }
 
     await event.update({
@@ -112,7 +112,7 @@ export const updateEvent = async (req: MulterRequest, res: Response) => {
 
     res.json(event);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao atualizar evento." });
+    res.status(500).json({ error: 'Erro ao atualizar evento.' });
   }
 };
 
@@ -121,12 +121,12 @@ export const deleteEvent = async (req: Request, res: Response) => {
   try {
     const event = await EventsModel.findByPk(req.params.id);
     if (!event) {
-      return res.status(404).json({ error: "Evento não encontrado." });
+      return res.status(404).json({ error: 'Evento não encontrado.' });
     }
 
     await event.destroy();
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ error: "Erro ao deletar evento." });
+    res.status(500).json({ error: 'Erro ao deletar evento.' });
   }
 };

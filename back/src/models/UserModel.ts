@@ -1,5 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import sequelize from "../config/database"; // Certifique-se de importar a instância correta do Sequelize
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../config/database'; // Certifique-se de importar a instância correta do Sequelize
 
 class UserModel extends Model {
   public id!: number;
@@ -7,8 +7,8 @@ class UserModel extends Model {
   public email!: string;
   public password!: string;
   public cpf!: string;
-  public type!: "usuario" | "organizador";
-  public assinatura_status!: "ativa" | "expirada" | "cancelada";
+  public type!: 'usuario' | 'organizador';
+  public assinatura_status!: 'ativa' | 'expirada' | 'cancelada';
 }
 
 UserModel.init(
@@ -39,19 +39,19 @@ UserModel.init(
       allowNull: false,
     },
     type: {
-      type: DataTypes.ENUM("usuario", "organizador"),
+      type: DataTypes.ENUM('usuario', 'organizador'),
       allowNull: false,
-      defaultValue: "usuario",
+      defaultValue: 'usuario',
     },
     assinatura_status: {
-      type: DataTypes.ENUM("ativa", "expirada", "cancelada"),
+      type: DataTypes.ENUM('ativa', 'expirada', 'cancelada'),
       allowNull: true,
     },
   },
   {
     sequelize, // Agora a instância do sequelize é passada corretamente
-    modelName: "UserModel",
-    tableName: "users",
+    modelName: 'UserModel',
+    tableName: 'users',
   }
 );
 
