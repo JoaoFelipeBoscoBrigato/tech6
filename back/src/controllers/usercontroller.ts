@@ -152,7 +152,7 @@ export const loginUser = async (req: Request, res: Response) => {
       { expiresIn: "1h" }
     );
 
-    res.json({ token });
+    res.json({ token, id: user.id });
   } catch (error) {
     console.error("❌ Erro no login:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -178,5 +178,82 @@ export const updateSubscription = async (
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+// Editar perfil (nome e email)
+export const editProfile = async (
+  req: Request<{ id: string }>,
+  res: Response
+) => {
+  try {
+    const { name, email } = req.body;
+    if (!name && !email) {
+      return res
+        .status(400)
+        .json({ error: "Informe nome ou email para atualizar." });
+    }
+    const user = await UserModel.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+    if (name) user.name = name;
+    if (email) {
+      // Verifica se o novo email já está em uso
+      const existingUser = await UserModel.findOne({
+        where: { email, id: { [Op.ne]: user.id } },
+      });
+      if (existingUser) {
+        return res
+          .status(400)
+          .json({ error: "Email já está em uso por outro usuário." });
+      }
+      user.email = email;
+    }
+    await user.save();
+    res.status(200).json({ message: "Perfil atualizado com sucesso", user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erro interno do servidor" });
+  }
+};
+
+// Trocar senha
+export const changePassword = async (
+  req: Request<{ id: string }>,
+  res: Response
+) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) {
+      return res
+        .status(400)
+        .json({ error: "Senha atual e nova senha são obrigatórias." });
+    }
+
+    // Validação da nova senha
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
+      return res.status(400).json({
+        error:
+          "A nova senha deve ter no mínimo 8 caracteres, uma letra maiúscula, um número e um caractere especial.",
+      });
+    }
+
+    const user = await UserModel.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+    const passwordMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ error: "Senha atual incorreta." });
+    }
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
+    res.status(200).json({ message: "Senha alterada com sucesso" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
