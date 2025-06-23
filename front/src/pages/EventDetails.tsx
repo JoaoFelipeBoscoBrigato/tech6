@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { api } from "../api/api";
 import "./EventDetails.css";
+
+interface Participant {
+  user: {
+    id: number;
+    name: string;
+  };
+}
 
 interface Event {
   id: number;
@@ -26,11 +34,16 @@ export default function EventDetails() {
   const [participating, setParticipating] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [registrationError, setRegistrationError] = useState("");
+  const [participants, setParticipants] = useState<Participant[]>([]);
+  const userType = localStorage.getItem("userType");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const fetchEvent = async () => {
+    const fetchEventDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/events/${id}`);
+        const response = await axios.get<Event>(
+          `http://localhost:3000/events/${id}`
+        );
         setEvent(response.data);
       } catch (err) {
         console.error("Erro ao carregar evento:", err);
@@ -42,8 +55,25 @@ export default function EventDetails() {
       }
     };
 
-    fetchEvent();
-  }, [id]);
+    const fetchParticipants = async () => {
+      if (userType === "organizador" && token) {
+        try {
+          const response = await api.get<Participant[]>(
+            `/events/${id}/participants`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          setParticipants(response.data);
+        } catch (err) {
+          console.error("Erro ao buscar participantes:", err);
+        }
+      }
+    };
+
+    fetchEventDetails();
+    fetchParticipants();
+  }, [id, userType, token]);
 
   const handleParticipate = async () => {
     if (!event) return;
@@ -284,6 +314,19 @@ export default function EventDetails() {
           )}
         </div>
       </div>
+
+      {userType === "organizador" && participants.length > 0 && (
+        <div className="participants-card">
+          <h3 className="participants-title">Participantes Inscritos</h3>
+          <ul className="participants-list">
+            {participants.map((p) => (
+              <li key={p.user.id} className="participant-item">
+                {p.user.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

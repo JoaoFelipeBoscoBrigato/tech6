@@ -11,6 +11,9 @@ interface Event {
   date: string;
   location: string;
   image_url: string | null;
+  organizer: {
+    name: string;
+  };
 }
 
 export default function Home() {
@@ -28,7 +31,7 @@ export default function Home() {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/events");
+      const response = await axios.get<Event[]>("http://localhost:3000/events");
       setEvents(response.data);
     } catch (err) {
       setError("Erro ao carregar eventos");
@@ -87,6 +90,11 @@ export default function Home() {
             <Link to="/signature" className="nav-button subscription-button">
               Assinatura
             </Link>
+            {localStorage.getItem("token") && (
+              <Link to="/profile" className="nav-button profile-button">
+                Perfil
+              </Link>
+            )}
           </div>
         </div>
       </nav>
@@ -133,7 +141,7 @@ export default function Home() {
           ) : (
             <div className="events-grid">
               {events.map((event) => (
-                <EventCard key={event.id} {...event} />
+                <EventCard key={event.id} event={event} />
               ))}
             </div>
           )}
