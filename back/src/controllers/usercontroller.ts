@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
-import UserModel from "../models/UserModel";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { Op } from "sequelize";
+import { Request, Response } from 'express';
+import UserModel from '../models/UserModel';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { Op } from 'sequelize';
 
 // Buscar todos os usuários (paginado)
 export const getAll = async (req: Request, res: Response) => {
@@ -22,7 +22,7 @@ export const getAll = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -32,13 +32,13 @@ export const getById = async (req: Request<{ id: string }>, res: Response) => {
     const user = await UserModel.findByPk(req.params.id);
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: 'User not found' });
     }
 
     return res.json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -48,13 +48,13 @@ export const createUser = async (req: Request, res: Response) => {
     const { name, email, password, cpf } = req.body;
 
     if (!name || !email || !password || !cpf) {
-      return res.status(400).json({ error: "All fields are required" });
+      return res.status(400).json({ error: 'All fields are required' });
     }
 
     // Verificar se o e-mail já está cadastrado
     const existingUser = await UserModel.findOne({ where: { email } });
     if (existingUser) {
-      return res.status(400).json({ error: "Email already in use" });
+      return res.status(400).json({ error: 'Email already in use' });
     }
 
     // Criptografar senha
@@ -65,14 +65,14 @@ export const createUser = async (req: Request, res: Response) => {
       email,
       password: hashedPassword,
       cpf,
-      type: "usuario",
+      type: 'usuario',
       assinatura_status: null,
     });
 
     res.status(201).json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -87,12 +87,12 @@ export const updateUser = async (
     if (!name || !password) {
       return res
         .status(400)
-        .json({ error: "Todos os campos são obrigatórios" });
+        .json({ error: 'Todos os campos são obrigatórios' });
     }
 
     const user = await UserModel.findByPk(req.params.id);
     if (!user) {
-      return res.status(404).json({ error: "Usuário não encontrado" });
+      return res.status(404).json({ error: 'Usuário não encontrado' });
     }
 
     // Atualizar nome
@@ -105,7 +105,7 @@ export const updateUser = async (
     res.status(200).json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Erro interno do servidor" });
+    res.status(500).json({ error: 'Erro interno do servidor' });
   }
 };
 
@@ -118,14 +118,14 @@ export const deleteUser = async (
     const user = await UserModel.findByPk(req.params.id);
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: 'User not found' });
     }
 
     await user.destroy();
     res.status(204).send();
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -134,28 +134,28 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
-    console.log("📥 Login request:", req.body);
+    console.log('📥 Login request:', req.body);
 
     if (!email || !password) {
-      return res.status(400).json({ error: "Email and password are required" });
+      return res.status(400).json({ error: 'Email and password are required' });
     }
 
     const user = await UserModel.findOne({ where: { email } });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const token = jwt.sign(
       { id: user.id, type: user.type },
       process.env.JWT_SECRET as string,
-      { expiresIn: "1h" }
+      { expiresIn: '1h' }
     );
 
     res.json({ token, id: user.id });
   } catch (error) {
-    console.error("❌ Erro no login:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('❌ Erro no login:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -167,17 +167,17 @@ export const updateSubscription = async (
   try {
     const user = await UserModel.findByPk(req.params.id);
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: 'User not found' });
     }
 
-    user.type = "organizador";
-    user.assinatura_status = "ativa";
+    user.type = 'organizador';
+    user.assinatura_status = 'ativa';
     await user.save();
 
-    res.json({ message: "User upgraded to organizer", user });
+    res.json({ message: 'User upgraded to organizer', user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 

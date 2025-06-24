@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 // Função para validar CPF
 export const validateCPF = (cpf: string): boolean => {
   // Remove caracteres não numéricos
-  cpf = cpf.replace(/[^\d]/g, "");
+  cpf = cpf.replace(/[^\d]/g, '');
 
   // Verifica se tem 11 dígitos
   if (cpf.length !== 11) return false;
@@ -49,7 +49,7 @@ export const cpfValidation = (
   const { cpf } = req.body;
 
   if (!validateCPF(cpf)) {
-    return res.status(400).json({ error: "CPF inválido" });
+    return res.status(400).json({ error: 'CPF inválido' });
   }
 
   next();
@@ -66,7 +66,7 @@ export const passwordValidation = (
   if (!validatePasswordStrength(password)) {
     return res.status(400).json({
       error:
-        "A senha deve ter no mínimo 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais",
+        'A senha deve ter no mínimo 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais',
     });
   }
 
@@ -83,7 +83,7 @@ export const emailValidation = (
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: "Formato de e-mail inválido" });
+    return res.status(400).json({ error: 'Formato de e-mail inválido' });
   }
 
   next();

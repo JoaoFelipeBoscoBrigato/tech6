@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import RegistrationsModel from "../models/registrationsModal";
-import EventsModel from "../models/EventsModel";
-import UserModel from "../models/UserModel";
+import { Request, Response } from 'express';
+import RegistrationsModel from '../models/registrationsModal';
+import EventsModel from '../models/EventsModel';
+import UserModel from '../models/UserModel';
 
 class RegistrationsController {
   // Criar uma nova inscrição
@@ -11,13 +11,13 @@ class RegistrationsController {
       const eventId = parseInt(req.params.id);
 
       if (isNaN(eventId)) {
-        return res.status(400).json({ error: "ID do evento inválido." });
+        return res.status(400).json({ error: 'ID do evento inválido.' });
       }
 
       // Verificar se o evento existe
       const event = await EventsModel.findByPk(eventId);
       if (!event) {
-        return res.status(404).json({ error: "Evento não encontrado." });
+        return res.status(404).json({ error: 'Evento não encontrado.' });
       }
 
       // Verificar se o usuário já está inscrito
@@ -27,7 +27,7 @@ class RegistrationsController {
       if (existingRegistration) {
         return res
           .status(409)
-          .json({ error: "Usuário já inscrito neste evento." });
+          .json({ error: 'Usuário já inscrito neste evento.' });
       }
 
       // Criar a inscrição
@@ -39,8 +39,8 @@ class RegistrationsController {
 
       return res.status(201).json(registration);
     } catch (error) {
-      console.error("Erro ao processar inscrição:", error);
-      return res.status(500).json({ error: "Erro ao processar inscrição." });
+      console.error('Erro ao processar inscrição:', error);
+      return res.status(500).json({ error: 'Erro ao processar inscrição.' });
     }
   }
 
@@ -51,7 +51,7 @@ class RegistrationsController {
       const eventId = parseInt(req.params.id);
 
       if (isNaN(eventId)) {
-        return res.status(400).json({ error: "ID do evento inválido." });
+        return res.status(400).json({ error: 'ID do evento inválido.' });
       }
 
       // Verificar se a inscrição existe
@@ -59,7 +59,7 @@ class RegistrationsController {
         where: { user_id: userId, event_id: eventId },
       });
       if (!registration) {
-        return res.status(404).json({ error: "Inscrição não encontrada." });
+        return res.status(404).json({ error: 'Inscrição não encontrada.' });
       }
 
       // Remover a inscrição
@@ -67,10 +67,10 @@ class RegistrationsController {
 
       return res
         .status(200)
-        .json({ message: "Inscrição cancelada com sucesso." });
+        .json({ message: 'Inscrição cancelada com sucesso.' });
     } catch (error) {
-      console.error("Erro ao cancelar inscrição:", error);
-      return res.status(500).json({ error: "Erro ao cancelar inscrição." });
+      console.error('Erro ao cancelar inscrição:', error);
+      return res.status(500).json({ error: 'Erro ao cancelar inscrição.' });
     }
   }
 
@@ -80,13 +80,13 @@ class RegistrationsController {
       const userId = (req as any).user.id;
       const registrations = await RegistrationsModel.findAll({
         where: { user_id: userId },
-        include: [{ model: EventsModel, as: "event" }],
+        include: [{ model: EventsModel, as: 'event' }],
       });
 
       return res.status(200).json(registrations);
     } catch (error) {
-      console.error("Erro ao listar inscrições:", error);
-      return res.status(500).json({ error: "Erro ao listar inscrições." });
+      console.error('Erro ao listar inscrições:', error);
+      return res.status(500).json({ error: 'Erro ao listar inscrições.' });
     }
   }
 }

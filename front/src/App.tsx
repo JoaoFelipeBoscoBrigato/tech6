@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Resgister";
-import Home from "./pages/Home";
-import CreateEvent from "./pages/CreateEvent";
-import SignaturePage from "./pages/SignaturePage";
-import EventDetails from "./pages/EventDetails";
-import Profile from "./pages/Profile";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import CreateEvent from './pages/CreateEvent';
+import SignaturePage from './pages/SignaturePage';
+import EventDetails from './pages/EventDetails';
+import Profile from './pages/Profile';
 
 function App() {
   return (

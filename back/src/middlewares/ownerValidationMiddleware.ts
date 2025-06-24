@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 
 export const checkOwnership = (
   req: Request,
@@ -11,7 +11,7 @@ export const checkOwnership = (
   if (userId !== requestedUserId) {
     return res
       .status(403)
-      .json({ error: "Você não tem permissão para modificar este recurso" });
+      .json({ error: 'Você não tem permissão para modificar este recurso' });
   }
 
   next();

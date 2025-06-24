@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from "express";
-import { checkOwnership } from "../middlewares/ownerValidationMiddleware";
+import { Request, Response, NextFunction } from 'express';
+import { checkOwnership } from '../middlewares/ownerValidationMiddleware';
 
 interface CustomRequest extends Request {
   user?: { id: number };
 }
 
-describe("Middleware de Validação de Propriedade", () => {
+describe('Middleware de Validação de Propriedade', () => {
   let mockRequest: Partial<CustomRequest>;
   let mockResponse: Partial<Response>;
   let mockNext: jest.Mock;
@@ -21,8 +21,8 @@ describe("Middleware de Validação de Propriedade", () => {
     mockNext = jest.fn();
   });
 
-  it("deve permitir acesso quando o usuário é o dono do recurso", () => {
-    mockRequest.params = { id: "1" };
+  it('deve permitir acesso quando o usuário é o dono do recurso', () => {
+    mockRequest.params = { id: '1' };
     mockRequest.user = { id: 1 };
 
     checkOwnership(
@@ -35,8 +35,8 @@ describe("Middleware de Validação de Propriedade", () => {
     expect(mockResponse.status).not.toHaveBeenCalled();
   });
 
-  it("deve negar acesso quando o usuário não é o dono do recurso", () => {
-    mockRequest.params = { id: "2" };
+  it('deve negar acesso quando o usuário não é o dono do recurso', () => {
+    mockRequest.params = { id: '2' };
     mockRequest.user = { id: 1 };
 
     checkOwnership(
@@ -47,13 +47,13 @@ describe("Middleware de Validação de Propriedade", () => {
 
     expect(mockResponse.status).toHaveBeenCalledWith(403);
     expect(mockResponse.json).toHaveBeenCalledWith({
-      error: "Você não tem permissão para modificar este recurso",
+      error: 'Você não tem permissão para modificar este recurso',
     });
     expect(mockNext).not.toHaveBeenCalled();
   });
 
-  it("deve negar acesso quando o ID do recurso é inválido", () => {
-    mockRequest.params = { id: "invalid" };
+  it('deve negar acesso quando o ID do recurso é inválido', () => {
+    mockRequest.params = { id: 'invalid' };
     mockRequest.user = { id: 1 };
 
     checkOwnership(
@@ -64,7 +64,7 @@ describe("Middleware de Validação de Propriedade", () => {
 
     expect(mockResponse.status).toHaveBeenCalledWith(403);
     expect(mockResponse.json).toHaveBeenCalledWith({
-      error: "Você não tem permissão para modificar este recurso",
+      error: 'Você não tem permissão para modificar este recurso',
     });
     expect(mockNext).not.toHaveBeenCalled();
   });

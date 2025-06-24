@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 interface AuthContextType {
   token: string | null;
@@ -9,15 +9,15 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   const login = (newToken: string) => {
-    localStorage.setItem("token", newToken);
+    localStorage.setItem('token', newToken);
     setToken(newToken);
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     setToken(null);
   };
 
@@ -30,6 +30,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth precisa estar dentro do AuthProvider");
+  if (!context) throw new Error('useAuth precisa estar dentro do AuthProvider');
   return context;
 };

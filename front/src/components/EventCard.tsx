@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import "./EventCard.css";
+import { Link } from 'react-router-dom';
+import './EventCard.css';
 
 interface Event {
   id: number;
@@ -20,14 +20,14 @@ interface EventCardProps {
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
   const { id, name, date, location, image_url, organizer } = event;
 
-  const formattedDate = new Date(date).toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
+  const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
   });
 
   return (
-    <Link to={`/evento/${id}`} className="event-card-link">
+    <Link to={`/evento/${id}`} className="event-card-link" data-cy="event-card">
       <div className="event-card">
         <div className="event-card-image-container">
           {image_url ? (

@@ -1,6 +1,6 @@
-import { Model, DataTypes } from "sequelize";
-import sequelize from "../config/database";
-import UserModel from "./UserModel"; // Importação do UserModel
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../config/database';
+import UserModel from './UserModel'; // Importação do UserModel
 
 interface EventAttributes {
   id?: number;
@@ -58,14 +58,14 @@ EventsModel.init(
       allowNull: false,
       references: {
         model: UserModel, // Referência correta a tabela de usuários
-        key: "id",
+        key: 'id',
       },
-      onDelete: "CASCADE", // Se um organizador for deletado, seus eventos são excluídos
+      onDelete: 'CASCADE', // Se um organizador for deletado, seus eventos são excluídos
     },
   },
   {
     sequelize,
-    tableName: "events",
+    tableName: 'events',
     timestamps: true,
     underscored: true,
   }
@@ -73,8 +73,8 @@ EventsModel.init(
 
 // Definindo a relação entre os modelos após a definição dos dois modelos
 EventsModel.belongsTo(UserModel, {
-  foreignKey: "organizer_id",
-  as: "organizer",
+  foreignKey: 'organizer_id',
+  as: 'organizer',
 });
 
 export default EventsModel;

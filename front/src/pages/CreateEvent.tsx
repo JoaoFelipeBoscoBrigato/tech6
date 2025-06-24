@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./CreateEvent.css";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './CreateEvent.css';
 
 export default function CreateEvent() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    name: "",
-    description: "",
-    date: "",
-    location: "",
+    name: '',
+    description: '',
+    date: '',
+    location: '',
     image: null as File | null,
   });
 
-  const [erro, setErro] = useState("");
+  const [erro, setErro] = useState('');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const handleChange = (
@@ -39,38 +39,43 @@ export default function CreateEvent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErro("");
+    setErro('');
 
-    const token = localStorage.getItem("token");
-    if (!token) return setErro("Usuário não autenticado.");
+    const token = localStorage.getItem('token');
+    if (!token) return setErro('Usuário não autenticado.');
+
+    if (!form.name || !form.description || !form.date || !form.location) {
+      setErro('Preencha todos os campos obrigatórios.');
+      return;
+    }
 
     try {
       const formData = new FormData();
-      formData.append("name", form.name);
-      formData.append("description", form.description);
-      formData.append("date", form.date);
-      formData.append("location", form.location);
+      formData.append('name', form.name);
+      formData.append('description', form.description);
+      formData.append('date', form.date);
+      formData.append('location', form.location);
 
       if (form.image) {
-        formData.append("image", form.image);
+        formData.append('image', form.image);
       }
 
       const response = await axios.post(
-        "http://localhost:3000/events",
+        'http://localhost:3000/events',
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      console.log("Evento criado:", response.data);
-      navigate("/home");
+      console.log('Evento criado:', response.data);
+      navigate('/home');
     } catch (err: any) {
       console.error(err);
-      setErro("Erro ao criar evento.");
+      setErro('Erro ao criar evento.');
     }
   };
 
@@ -95,6 +100,7 @@ export default function CreateEvent() {
             onChange={handleChange}
             placeholder="Digite o nome do evento"
             required
+            data-cy="title-input"
           />
         </div>
 
@@ -110,6 +116,7 @@ export default function CreateEvent() {
             onChange={handleChange}
             placeholder="Descreva o seu evento"
             required
+            data-cy="description-input"
           />
         </div>
 
@@ -125,6 +132,7 @@ export default function CreateEvent() {
             value={form.date}
             onChange={handleChange}
             required
+            data-cy="date-input"
           />
         </div>
 
@@ -141,6 +149,7 @@ export default function CreateEvent() {
             onChange={handleChange}
             placeholder="Digite o local do evento"
             required
+            data-cy="location-input"
           />
         </div>
 
@@ -154,6 +163,7 @@ export default function CreateEvent() {
             accept="image/*"
             className="create-event-file-input"
             onChange={handleFileChange}
+            data-cy="image-input"
           />
           {previewUrl && (
             <div className="create-event-preview">
@@ -166,9 +176,17 @@ export default function CreateEvent() {
           )}
         </div>
 
-        {erro && <p className="create-event-error">{erro}</p>}
+        {erro && (
+          <p className="create-event-error" data-cy="error-message">
+            {erro}
+          </p>
+        )}
 
-        <button type="submit" className="create-event-button">
+        <button
+          type="submit"
+          className="create-event-button"
+          data-cy="create-event-button"
+        >
           Criar Evento
         </button>
       </form>
