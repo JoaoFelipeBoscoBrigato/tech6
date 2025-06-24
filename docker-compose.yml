@@ -1,0 +1,52 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: tech5br
+      MYSQL_ROOT_PASSWORD: '2005'
+    ports:
+      - '3307:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - tech6net
+
+  backend:
+    build: ./back
+    container_name: backend
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: '2005'
+      DB_NAME: tech5br
+      JWT_SECRET: 'SegredoSuperSecreto'
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./back/uploads:/app/uploads
+    depends_on:
+      - db
+    networks:
+      - tech6net
+
+  frontend:
+    build: ./front
+    container_name: frontend
+    restart: always
+    ports:
+      - '4173:4173'
+    depends_on:
+      - backend
+    networks:
+      - tech6net
+
+volumes:
+  db_data:
+
+networks:
+  tech6net:
+    driver: bridge
