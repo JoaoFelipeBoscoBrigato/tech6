@@ -1,7 +1,11 @@
 /* Estilos gerais */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+<<<<<<< HEAD
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+=======
   background: linear-gradient(135deg, #6e8efb, #a777e3);
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   margin: 0;
   padding: 0;
   height: 100vh;

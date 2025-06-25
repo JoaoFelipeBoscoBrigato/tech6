@@ -11,9 +11,12 @@ interface Event {
   date: string;
   location: string;
   image_url: string | null;
+<<<<<<< HEAD
   organizer: {
     name: string;
   };
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 export default function Home() {
@@ -31,7 +34,15 @@ export default function Home() {
 
   const fetchEvents = async () => {
     try {
+<<<<<<< HEAD
       const response = await axios.get<Event[]>('http://localhost/api/events');
+=======
+<<<<<<< HEAD
+      const response = await axios.get<Event[]>('http://localhost:3000/events');
+=======
+      const response = await axios.get('http://localhost:3000/events');
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
+>>>>>>> a445d2e9df56f365eeb9f0606d86f93e7791b5fd
       setEvents(response.data);
     } catch (err) {
       setError('Erro ao carregar eventos');
@@ -81,6 +92,38 @@ export default function Home() {
             />
           </Link>
           <div className="navigation-buttons">
+<<<<<<< HEAD
+            {!localStorage.getItem('token') ? (
+              <>
+                <Link to="/login" className="nav-button login-button">
+                  Login
+                </Link>
+                <Link to="/register" className="nav-button register-button">
+                  Registrar
+                </Link>
+              </>
+            ) : null}
+            <Link to="/signature" className="nav-button subscription-button">
+              Assinatura
+            </Link>
+            {localStorage.getItem('token') && (
+              <>
+                <Link to="/profile" className="nav-button profile-button">
+                  Perfil
+                </Link>
+                <Link
+                  to="/login"
+                  onClick={() => {
+                    localStorage.clear();
+                  }}
+                  className="nav-button logout-button"
+                  data-cy="logout-button"
+                >
+                  Logout
+                </Link>
+              </>
+            )}
+=======
             <Link to="/login" className="nav-button login-button">
               Login
             </Link>
@@ -90,29 +133,17 @@ export default function Home() {
             <Link to="/signature" className="nav-button subscription-button">
               Assinatura
             </Link>
-            {localStorage.getItem('token') && (
-              <>
-                <Link to="/profile" className="nav-button profile-button">
-                  Perfil
-                </Link>
-                <button
-                  onClick={() => {
-                    localStorage.clear();
-                    window.location.href = '/login';
-                  }}
-                  className="nav-button logout-button"
-                  data-cy="logout-button"
-                >
-                  Logout
-                </button>
-              </>
-            )}
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
           </div>
         </div>
       </nav>
 
       <div className="home-container">
         <div className="home-content">
+<<<<<<< HEAD
+          {userType === 'organizador' && (
+            <div className="create-event-section">
+=======
           <div className="home-header">
             <div className="home-title-container">
               <h1 className="home-title">Eventos Disponíveis</h1>
@@ -121,13 +152,25 @@ export default function Home() {
               </p>
             </div>
             {userType === 'organizador' && (
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
               <button
                 onClick={handleCreateEvent}
                 className="create-event-button"
               >
                 Criar Evento
               </button>
+<<<<<<< HEAD
+            </div>
+          )}
+
+          <div className="home-title-container">
+            <h1 className="home-title">Eventos Disponíveis</h1>
+            <p className="home-subtitle">
+              Descubra os melhores eventos para você
+            </p>
+=======
             )}
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
           </div>
 
           {events.length === 0 ? (
@@ -153,7 +196,11 @@ export default function Home() {
           ) : (
             <div className="events-grid">
               {events.map((event) => (
+<<<<<<< HEAD
                 <EventCard key={event.id} event={event} />
+=======
+                <EventCard key={event.id} {...event} />
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
               ))}
             </div>
           )}

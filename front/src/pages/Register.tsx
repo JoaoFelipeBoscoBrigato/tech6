@@ -17,22 +17,87 @@ export default function Register() {
 
   const [erro, setErro] = useState('');
   const [success, setSuccess] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [cpfError, setCpfError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    // Limpar erro geral quando o usuário começar a corrigir
+    if (erro) {
+      setErro('');
+    }
+    
+    // Validar email em tempo real
+    if (name === 'email') {
+      if (value && !validarEmail(value)) {
+        setEmailError('O email deve terminar com @gmail.com');
+      } else {
+        setEmailError('');
+      }
+    }
+
+    // Validar CPF em tempo real
+    if (name === 'cpf') {
+      // Remover caracteres não numéricos para validação
+      const cpfNumeros = value.replace(/\D/g, '');
+      if (value && cpfNumeros.length !== 11) {
+        setCpfError('O CPF deve ter exatamente 11 números');
+      } else {
+        setCpfError('');
+      }
+    }
+
+    // Validar senha em tempo real
+    if (name === 'password') {
+      if (value && !validarSenha(value)) {
+        setPasswordError('A senha deve conter pelo menos uma letra maiúscula, um número, um caractere especial e ter mais de 6 dígitos');
+      } else {
+        setPasswordError('');
+      }
+      // Revalidar confirmação de senha quando a senha principal muda
+      if (formData.confirmPassword && value !== formData.confirmPassword) {
+        setConfirmPasswordError('As senhas não coincidem');
+      } else if (formData.confirmPassword && value === formData.confirmPassword) {
+        setConfirmPasswordError('');
+      }
+    }
+
+    // Validar confirmação de senha em tempo real
+    if (name === 'confirmPassword') {
+      if (value && value !== formData.password) {
+        setConfirmPasswordError('As senhas não coincidem');
+      } else {
+        setConfirmPasswordError('');
+      }
+    }
   };
 
   const validarEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
+    if (!email.endsWith('@gmail.com')) {
+      return false;
+    }
+    return true;
   };
 
-  const validarCPF = (cpf: string) => {
-    const regex = /^\d{11}$/;
-    return regex.test(cpf);
+  const validarSenha = (senha: string) => {
+    // Verificar se tem mais de 6 dígitos
+    if (senha.length <= 6) return false;
+    
+    // Verificar se tem pelo menos uma letra maiúscula
+    if (!/[A-Z]/.test(senha)) return false;
+    
+    // Verificar se tem pelo menos um número
+    if (!/\d/.test(senha)) return false;
+    
+    // Verificar se tem pelo menos um caractere especial
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(senha)) return false;
+    
+    return true;
   };
-
-  const senhaForte = (senha: string) => senha.length >= 6;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,11 +111,14 @@ export default function Register() {
     if (!cpf) return setErro('Please enter your CPF.');
     if (!password) return setErro('Please enter your password.');
     if (!confirmPassword) return setErro('Please confirm your password.');
-    if (!validarEmail(email)) return setErro('Invalid email format');
-    if (!validarCPF(cpf)) return setErro('Invalid CPF format');
-    if (!senhaForte(password))
-      return setErro('Password must be at least 6 characters');
-    if (password !== confirmPassword) return setErro('Passwords do not match');
+    if (!validarEmail(email)) return setErro('O email deve terminar com @gmail.com');
+    
+    // Validar CPF usando a mesma lógica da validação em tempo real
+    const cpfNumeros = cpf.replace(/\D/g, '');
+    if (cpfNumeros.length !== 11) return setErro('O CPF deve ter exatamente 11 números');
+    
+    if (!validarSenha(password)) return setErro('A senha deve conter pelo menos uma letra maiúscula, um número, um caractere especial e ter mais de 6 dígitos');
+    if (password !== confirmPassword) return setErro('As senhas não coincidem');
 
     try {
       await axios.post('http://localhost/api/users', {
@@ -115,14 +183,17 @@ export default function Register() {
             type="email"
             id="email"
             name="email"
-            className="register-input"
+            className={`register-input ${emailError ? 'register-input-error' : ''}`}
             value={formData.email}
             onChange={handleChange}
-            placeholder="seu@email.com"
+            placeholder="seu@gmail.com"
             data-cy="email-input"
           />
+          {emailError && (
+            <span className="register-field-error" data-cy="email-error">{emailError}</span>
+          )}
           {(erro === 'Please enter your email.' ||
-            erro === 'Invalid email format') && (
+            erro === 'O email deve terminar com @gmail.com') && (
             <span data-cy="email-error">{erro}</span>
           )}
         </div>
@@ -135,15 +206,14 @@ export default function Register() {
             type="text"
             id="cpf"
             name="cpf"
-            className="register-input"
+            className={`register-input ${cpfError ? 'register-input-error' : ''}`}
             value={formData.cpf}
             onChange={handleChange}
             placeholder="Seu CPF"
             data-cy="cpf-input"
           />
-          {(erro === 'Please enter your CPF.' ||
-            erro === 'Invalid CPF format') && (
-            <span data-cy="cpf-error">{erro}</span>
+          {cpfError && (
+            <span className="register-field-error" data-cy="cpf-error">{cpfError}</span>
           )}
         </div>
 
@@ -155,17 +225,14 @@ export default function Register() {
             type="password"
             id="password"
             name="password"
-            className="register-input"
+            className={`register-input ${passwordError ? 'register-input-error' : ''}`}
             value={formData.password}
             onChange={handleChange}
             placeholder="Sua senha"
             data-cy="password-input"
           />
-          {(erro === 'Please enter your password.' ||
-            erro === 'Password must be at least 6 characters' ||
-            erro === 'Please confirm your password.' ||
-            erro === 'Passwords do not match') && (
-            <span data-cy="password-error">{erro}</span>
+          {passwordError && (
+            <span className="register-field-error" data-cy="password-error">{passwordError}</span>
           )}
         </div>
 
@@ -177,11 +244,14 @@ export default function Register() {
             type="password"
             id="confirmPassword"
             name="confirmPassword"
-            className="register-input"
+            className={`register-input ${confirmPasswordError ? 'register-input-error' : ''}`}
             value={formData.confirmPassword}
             onChange={handleChange}
             placeholder="Confirme sua senha"
           />
+          {confirmPasswordError && (
+            <span className="register-field-error" data-cy="confirm-password-error">{confirmPasswordError}</span>
+          )}
         </div>
 
         {success && (

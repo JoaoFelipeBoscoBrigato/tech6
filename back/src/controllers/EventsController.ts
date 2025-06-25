@@ -74,7 +74,7 @@ export const getAllEvents = async (req: Request, res: Response) => {
         {
           model: UserModel,
           as: 'organizer',
-          attributes: ['name'], // Inclui apenas o nome do organizador
+          attributes: ['name'],
         },
       ],
     });
@@ -152,7 +152,7 @@ export const getEventParticipants = async (req: Request, res: Response) => {
         {
           model: UserModel,
           as: 'user',
-          attributes: ['id', 'name'], // Pega ID e nome do participante
+          attributes: ['id', 'name'],
         },
       ],
     });

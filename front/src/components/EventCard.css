@@ -16,6 +16,109 @@
   transform: translateY(-4px);
 }
 
+<<<<<<< HEAD
+.event-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.event-card-image-container {
+  position: relative;
+  height: 14rem;
+  overflow: hidden;
+}
+
+.event-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.event-card-placeholder-image {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.event-card-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.event-card-title {
+  color: #111827;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.event-card-date {
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-card-date::before {
+  content: '📅';
+  font-size: 0.75rem;
+}
+
+.event-card-location {
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-card-location::before {
+  content: '📍';
+  font-size: 0.75rem;
+}
+
+.event-card-organizer {
+  color: #6b7280;
+  font-size: 0.8rem;
+  font-weight: 400;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-card-organizer::before {
+  content: '👤';
+  font-size: 0.75rem;
+}
+
+.event-card-organizer strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 .event-image-container {
   position: relative;
   height: 14rem;

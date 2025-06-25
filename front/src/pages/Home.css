@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+/* Reset para garantir alinhamento perfeito */
+.navbar * {
+  box-sizing: border-box;
+}
+
+.navbar button,
+.navbar a {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 .home-container {
   margin-top: 4rem;
   min-height: calc(100vh - 4rem);
@@ -25,9 +44,16 @@
 .home-header {
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 2rem;
+=======
   justify-content: space-between;
   align-items: center;
   margin-bottom: 3rem;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 @media (min-width: 768px) {
@@ -38,7 +64,13 @@
 
 .home-title-container {
   text-align: center;
+<<<<<<< HEAD
+  margin-bottom: 2rem;
+  margin-top: 0;
+  padding-bottom: 0;
+=======
   margin-bottom: 1.5rem;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 @media (min-width: 768px) {
@@ -59,6 +91,16 @@
   color: #4b5563;
 }
 
+<<<<<<< HEAD
+.create-event-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+  padding-top: 1rem;
+}
+
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 .create-event-button {
   background: linear-gradient(to right, #22c55e, #16a34a);
   color: white;
@@ -67,6 +109,13 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   transform: translateY(0);
+<<<<<<< HEAD
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-button:hover {
@@ -185,14 +234,22 @@
 }
 
 .navbar {
+<<<<<<< HEAD
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+=======
   background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   padding: 0.75rem 2rem;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+<<<<<<< HEAD
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+=======
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .navbar-content {
@@ -201,6 +258,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
+  height: 80px;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .navbar-logo {
@@ -208,6 +269,10 @@
   align-items: center;
   text-decoration: none;
   transition: transform 0.3s ease;
+<<<<<<< HEAD
+  height: 80px;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .navbar-logo:hover {
@@ -215,7 +280,11 @@
 }
 
 .logo-image {
+<<<<<<< HEAD
+  height: 80px;
+=======
   height: 50px;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
@@ -223,6 +292,18 @@
 
 .navigation-buttons {
   display: flex;
+<<<<<<< HEAD
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: 80px;
+}
+
+.nav-button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 600;
+=======
   gap: 1rem;
 }
 
@@ -230,11 +311,45 @@
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   font-weight: 500;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+<<<<<<< HEAD
+  font-size: 0.85rem;
+  min-width: 90px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  font-family: inherit;
+  line-height: 1;
+  margin: 0;
+  vertical-align: middle;
+  box-sizing: border-box;
+  position: relative;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+=======
   font-size: 0.9rem;
 }
 
@@ -278,6 +393,7 @@
 .subscription-button:hover {
   background-color: #db2777;
   transform: translateY(-2px);
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 body {
@@ -295,6 +411,49 @@ body {
 }
 
 .login-button {
+<<<<<<< HEAD
+  /* Estilos removidos - usando .nav-button padrão */
+}
+
+.subscription-button {
+  background: rgba(192, 192, 192, 0.2) !important;
+  border-color: rgba(192, 192, 192, 0.3) !important;
+  font-family: 'Inter', 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em !important;
+}
+
+.subscription-button:hover {
+  background: rgba(192, 192, 192, 0.3) !important;
+  border-color: rgba(192, 192, 192, 0.4) !important;
+}
+
+.profile-button {
+  background: rgba(192, 192, 192, 0.2) !important;
+  border-color: rgba(192, 192, 192, 0.3) !important;
+  font-family: 'Inter', 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em !important;
+}
+
+.profile-button:hover {
+  background: rgba(192, 192, 192, 0.3) !important;
+  border-color: rgba(192, 192, 192, 0.4) !important;
+}
+
+.logout-button {
+  background: rgba(192, 192, 192, 0.2) !important;
+  border-color: rgba(192, 192, 192, 0.3) !important;
+  font-family: 'Inter', 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em !important;
+}
+
+.logout-button:hover {
+  background: rgba(192, 192, 192, 0.3) !important;
+  border-color: rgba(192, 192, 192, 0.4) !important;
+=======
   background: linear-gradient(to right, #a777e3, #9868e0);
   color: white;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }

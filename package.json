@@ -17,7 +17,8 @@
     "setup": "cp env.example .env && echo 'Arquivo .env criado! Configure as variáveis conforme necessário.'",
     "health": "curl -f http://localhost/health || echo 'Serviços não estão respondendo'",
     "test:e2e": "cd cypress && npm run cypress:run",
-    "test:e2e:open": "cd cypress && npm run cypress:open"
+    "test:e2e:open": "cd cypress && npm run cypress:open",
+    "test": "echo \"Nenhum teste na raiz\" && exit 0"
   },
   "keywords": [
     "docker",
