@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .create-event-container {
   min-height: 100vh;
   display: flex;
@@ -5,10 +6,18 @@
   justify-content: center;
   padding: 4rem 1rem 2rem 1rem;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+=======
+.criar-evento-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-form {
   background: white;
+<<<<<<< HEAD
   padding: 3rem;
   border-radius: 16px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -16,24 +25,44 @@
   max-width: 600px;
   margin: 0 auto;
   margin-top: 2rem;
+=======
+  padding: 3.2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-title {
   font-size: 2rem;
+<<<<<<< HEAD
   font-weight: 700;
   color: #111827;
   margin-bottom: 1rem;
   text-align: center;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+=======
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  text-align: center;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-subtitle {
   color: #6b7280;
+<<<<<<< HEAD
   margin-bottom: 2.5rem;
   text-align: center;
   font-size: 1rem;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5;
+=======
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1rem;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-input-group {
@@ -43,33 +72,49 @@
 .create-event-label {
   display: block;
   margin-bottom: 0.5rem;
+<<<<<<< HEAD
   color: #374151;
   font-size: 0.875rem;
   font-weight: 500;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+=======
+  color: #4b5563;
+  font-size: 0.875rem;
+  font-weight: 500;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-input {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 2px solid #e5e7eb;
+<<<<<<< HEAD
   border-radius: 8px;
   font-size: 0.875rem;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: all 0.2s ease;
   box-sizing: border-box;
+=======
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-input:focus {
   outline: none;
   border-color: #3b82f6;
+<<<<<<< HEAD
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-textarea {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 2px solid #e5e7eb;
+<<<<<<< HEAD
   border-radius: 8px;
   font-size: 0.875rem;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -78,18 +123,29 @@
   transition: all 0.2s ease;
   box-sizing: border-box;
   line-height: 1.5;
+=======
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  min-height: 100px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-textarea:focus {
   outline: none;
   border-color: #3b82f6;
+<<<<<<< HEAD
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-file-input {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 2px dashed #e5e7eb;
+<<<<<<< HEAD
   border-radius: 8px;
   font-size: 0.875rem;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -97,6 +153,13 @@
   cursor: pointer;
   transition: all 0.2s ease;
   box-sizing: border-box;
+=======
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition: all 0.3s ease;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-file-input:hover {
@@ -107,11 +170,15 @@
 .create-event-file-input:focus {
   outline: none;
   border-color: #3b82f6;
+<<<<<<< HEAD
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-button {
   width: 100%;
+<<<<<<< HEAD
   padding: 0.875rem 1.5rem;
   background: linear-gradient(to right, #3b82f6, #2563eb);
   color: white;
@@ -123,11 +190,23 @@
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1rem;
+=======
+  padding: 0.75rem;
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-button:hover {
   background: linear-gradient(to right, #2563eb, #1d4ed8);
   transform: translateY(-2px);
+<<<<<<< HEAD
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
@@ -150,11 +229,14 @@
   background: linear-gradient(to right, #2563eb, #1d4ed8);
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-error {
   color: #ef4444;
   font-size: 0.875rem;
+<<<<<<< HEAD
   margin-top: 1rem;
   text-align: center;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -162,6 +244,10 @@
   background-color: #fee2e2;
   border-radius: 8px;
   border: 1px solid #fecaca;
+=======
+  margin-top: 0.5rem;
+  text-align: center;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .create-event-preview {
@@ -172,6 +258,7 @@
 .create-event-preview-image {
   max-width: 100%;
   max-height: 200px;
+<<<<<<< HEAD
   border-radius: 8px;
   margin-top: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -186,6 +273,15 @@
   .create-event-form {
     padding: 2rem;
     margin-top: 1rem;
+=======
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .create-event-form {
+    padding: 2rem;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   }
 
   .create-event-title {
@@ -193,6 +289,7 @@
   }
 }
 
+<<<<<<< HEAD
 @media (max-height: 700px) {
   .create-event-container {
     padding: 1rem;
@@ -203,4 +300,21 @@
     margin-top: 0.5rem;
     padding: 2rem;
   }
+=======
+.criar-evento-container {
+  max-width: 600px;
+  margin: 80px auto; /* Aumentei a margem superior para 80px */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.create-event-form {
+  background: white;
+  padding: 3.2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+  margin: 80px auto; /* Adicione esta linha */
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .register-container {
   background: linear-gradient(135deg, #1e3a8a, #3b82f6, #60a5fa);
   min-height: 100vh;
@@ -14,6 +15,8 @@
   overflow-y: auto;
 }
 
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 .registration-container {
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
@@ -25,10 +28,13 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-sizing: border-box;
+<<<<<<< HEAD
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .form-group {
@@ -43,12 +49,15 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 450px;
+<<<<<<< HEAD
   min-height: 600px;
   text-align: center;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .register-title {
@@ -68,11 +77,14 @@
 
 .register-input-group {
   margin-bottom: 1rem;
+<<<<<<< HEAD
   text-align: center;
   min-height: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .register-label {
@@ -81,7 +93,10 @@
   color: #4b5563;
   font-size: 0.875rem;
   font-weight: 500;
+<<<<<<< HEAD
   text-align: center;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .register-input {
@@ -91,12 +106,15 @@
   border-radius: 0.5rem;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+<<<<<<< HEAD
   text-align: center;
   box-sizing: border-box;
 }
 
 .register-input::placeholder {
   text-align: center;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .register-input:focus {
@@ -104,6 +122,7 @@
   border-color: #3b82f6;
 }
 
+<<<<<<< HEAD
 .register-input-error {
   border-color: #ef4444 !important;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
@@ -120,6 +139,8 @@
   line-height: 1.2;
 }
 
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 .register-button {
   width: 100%;
   padding: 0.75rem;
@@ -132,8 +153,11 @@
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1rem;
+<<<<<<< HEAD
   margin-bottom: 1rem;
   flex-shrink: 0;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .register-button:hover {
@@ -146,6 +170,7 @@
   font-size: 0.875rem;
   margin-top: 0.5rem;
   text-align: center;
+<<<<<<< HEAD
   min-height: 1.25rem;
   display: flex;
   align-items: center;
@@ -161,12 +186,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .register-links {
   margin-top: 1.5rem;
   text-align: center;
+<<<<<<< HEAD
   flex-shrink: 0;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .register-link {
@@ -184,14 +214,20 @@
 @media (max-width: 640px) {
   .register-form {
     padding: 2rem;
+<<<<<<< HEAD
     min-height: 550px;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   }
 
   .register-title {
     font-size: 1.75rem;
   }
+<<<<<<< HEAD
 
   .register-input-group {
     min-height: 3.5rem;
   }
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }

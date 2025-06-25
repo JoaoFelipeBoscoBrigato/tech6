@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+<<<<<<< HEAD
 import { api } from '../api/api';
 import './EventDetails.css';
 import React from 'react';
@@ -11,6 +12,9 @@ interface Participant {
     name: string;
   };
 }
+=======
+import './EventDetails.css';
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 
 interface Event {
   id: number;
@@ -35,6 +39,7 @@ export default function EventDetails() {
   const [participating, setParticipating] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [registrationError, setRegistrationError] = useState('');
+<<<<<<< HEAD
   const [participants, setParticipants] = useState<Participant[]>([]);
   const userType = localStorage.getItem('userType');
   const token = localStorage.getItem('token');
@@ -70,6 +75,13 @@ export default function EventDetails() {
         const response = await axios.get<Event>(
           `http://localhost:3000/events/${id}`
         );
+=======
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/events/${id}`);
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
         setEvent(response.data);
       } catch (err) {
         console.error('Erro ao carregar evento:', err);
@@ -81,6 +93,7 @@ export default function EventDetails() {
       }
     };
 
+<<<<<<< HEAD
     fetchEventDetails();
     fetchParticipants();
   }, [id, userType, token]);
@@ -95,6 +108,10 @@ export default function EventDetails() {
       });
     }
   }, [event]);
+=======
+    fetchEvent();
+  }, [id]);
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 
   const handleParticipate = async () => {
     if (!event) return;
@@ -124,6 +141,7 @@ export default function EventDetails() {
       );
 
       alert('Inscrição realizada com sucesso!');
+<<<<<<< HEAD
       
       // Atualizar o estado do evento para refletir a nova inscrição
       const updatedEvent = await axios.get<Event>(
@@ -148,6 +166,21 @@ export default function EventDetails() {
             'Erro ao participar do evento. Por favor, tente novamente.'
           );
         }
+=======
+      // Atualizar o estado do evento para refletir a nova inscrição
+      const updatedEvent = await axios.get(
+        `http://localhost:3000/events/${id}`
+      );
+      setEvent(updatedEvent.data);
+    } catch (err: any) {
+      console.error('Erro ao participar do evento:', err);
+      if (err.response?.status === 401) {
+        setRegistrationError(
+          'Você precisa estar logado para participar do evento.'
+        );
+      } else if (err.response?.status === 409) {
+        setRegistrationError('Você já está inscrito neste evento.');
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
       } else {
         setRegistrationError(
           'Erro ao participar do evento. Por favor, tente novamente.'
@@ -158,6 +191,7 @@ export default function EventDetails() {
     }
   };
 
+<<<<<<< HEAD
   const handleEditChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -190,6 +224,8 @@ export default function EventDetails() {
     }
   };
 
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   if (loading) {
     return (
       <div className="event-details-container">
@@ -280,12 +316,19 @@ export default function EventDetails() {
         )}
 
         <div className="event-details-info">
+<<<<<<< HEAD
           <h1 className="event-details-title" data-cy="event-title">
             {event.name}
           </h1>
 
           <div className="event-details-meta">
             <div className="event-details-meta-item" data-cy="event-date">
+=======
+          <h1 className="event-details-title">{event.name}</h1>
+
+          <div className="event-details-meta">
+            <div className="event-details-meta-item">
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
               <svg
                 className="event-details-meta-icon"
                 fill="none"
@@ -301,7 +344,11 @@ export default function EventDetails() {
               </svg>
               {formattedDate}
             </div>
+<<<<<<< HEAD
             <div className="event-details-meta-item" data-cy="event-location">
+=======
+            <div className="event-details-meta-item">
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
               <svg
                 className="event-details-meta-icon"
                 fill="none"
@@ -327,12 +374,16 @@ export default function EventDetails() {
 
           <div className="event-details-description-container">
             <h3 className="event-details-description-title">Sobre o Evento</h3>
+<<<<<<< HEAD
             <p
               className="event-details-description"
               data-cy="event-description"
             >
               {event.description}
             </p>
+=======
+            <p className="event-details-description">{event.description}</p>
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
           </div>
 
           {event.organizer && (
@@ -366,7 +417,10 @@ export default function EventDetails() {
             <button
               onClick={() => navigate('/home')}
               className="event-details-button event-details-button-secondary"
+<<<<<<< HEAD
               data-cy="back-button"
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
             >
               Voltar
             </button>
@@ -374,6 +428,7 @@ export default function EventDetails() {
               onClick={handleParticipate}
               className="event-details-button event-details-button-primary"
               disabled={participating}
+<<<<<<< HEAD
               data-cy="participate-button"
             >
               {participating ? 'Participando...' : 'Participar do Evento'}
@@ -403,11 +458,21 @@ export default function EventDetails() {
               className="event-details-error-message"
               data-cy="error-message"
             >
+=======
+            >
+              {participating ? 'Participando...' : 'Participar do Evento'}
+            </button>
+          </div>
+
+          {registrationError && (
+            <div className="event-details-error-message">
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
               {registrationError}
             </div>
           )}
         </div>
       </div>
+<<<<<<< HEAD
 
       {userType === 'organizador' && participants.length > 0 && (
         <div className="participants-card">
@@ -517,6 +582,8 @@ export default function EventDetails() {
           </div>
         </div>
       )}
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
     </div>
   );
 }

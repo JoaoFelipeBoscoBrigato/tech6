@@ -40,6 +40,7 @@
 
 .signature-label {
   display: block;
+<<<<<<< HEAD
   margin-bottom: 0.75rem;
   color: #374151;
   font-size: 0.875rem;
@@ -91,10 +92,33 @@
 .signature-payment-group {
   margin-bottom: 2rem;
   text-align: left;
+=======
+  margin-bottom: 0.5rem;
+  color: #4b5563;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.signature-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background-color: white;
+  cursor: pointer;
+}
+
+.signature-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .signature-button {
   width: 100%;
+<<<<<<< HEAD
   padding: 1rem 1.5rem;
   background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
@@ -113,12 +137,31 @@
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+=======
+  padding: 0.75rem;
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signature-button:hover:not(:disabled) {
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  transform: translateY(-2px);
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .signature-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+<<<<<<< HEAD
   transform: none;
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 }
 
 .signature-benefits {
@@ -162,12 +205,17 @@
 }
 
 .subscription-page {
+<<<<<<< HEAD
   background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+=======
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   color: white;
   min-height: 100vh;
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+<<<<<<< HEAD
 
 .back-home-button {
   display: flex;
@@ -211,3 +259,5 @@
   justify-content: center;
   margin-top: 2rem;
 }
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499

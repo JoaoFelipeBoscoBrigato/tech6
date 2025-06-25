@@ -6,10 +6,15 @@ import {
   updateEvent,
   deleteEvent,
   uploadEventImage,
+<<<<<<< HEAD
   getEventParticipants,
 } from '../controllers/EventsController';
 import { authenticateToken } from '../middlewares/authMiddleware';
 import { isOrganizer } from '../middlewares/organizerAuthMiddleware';
+=======
+} from '../controllers/EventsController';
+import { authenticateToken } from '../middlewares/authMiddleware';
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 import { upload } from '../middlewares/uploadMiddleware'; // Middleware para upload de imagens
 
 const router = Express.Router();
@@ -37,6 +42,7 @@ router.post(
   uploadEventImage
 );
 
+<<<<<<< HEAD
 // Rota para buscar participantes de um evento (apenas organizadores)
 router.get(
   '/events/:id/participants',
@@ -45,4 +51,6 @@ router.get(
   getEventParticipants
 );
 
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 export default router;

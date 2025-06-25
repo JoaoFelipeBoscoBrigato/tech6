@@ -225,6 +225,7 @@
     flex-direction: column;
   }
 }
+<<<<<<< HEAD
 
 .participants-card {
   background-color: #f9f9f9;
@@ -397,3 +398,5 @@
 .event-details-button-delete:hover {
   background: #dc2626;
 }
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499

@@ -16,6 +16,7 @@
   transform: translateY(-4px);
 }
 
+<<<<<<< HEAD
 .event-card-link {
   text-decoration: none;
   color: inherit;
@@ -116,6 +117,8 @@
   font-weight: 600;
 }
 
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 .event-image-container {
   position: relative;
   height: 14rem;

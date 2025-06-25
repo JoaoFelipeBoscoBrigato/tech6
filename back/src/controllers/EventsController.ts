@@ -3,8 +3,11 @@ import EventsModel from '../models/EventsModel';
 import { authenticateToken } from '../middlewares/authMiddleware';
 import { upload } from '../middlewares/uploadMiddleware';
 import jwt from 'jsonwebtoken';
+<<<<<<< HEAD
 import UserModel from '../models/UserModel';
 import RegistrationsModel from '../models/registrationsModal';
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 
 // Estender a interface Request para incluir a propriedade file
 interface MulterRequest extends Request {
@@ -69,6 +72,7 @@ export const createEvent = async (req: MulterRequest, res: Response) => {
 // Listar todos os eventos
 export const getAllEvents = async (req: Request, res: Response) => {
   try {
+<<<<<<< HEAD
     const events = await EventsModel.findAll({
       include: [
         {
@@ -82,6 +86,12 @@ export const getAllEvents = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao buscar eventos' });
+=======
+    const events = await EventsModel.findAll();
+    res.json(events);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao listar eventos.' });
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   }
 };
 
@@ -141,6 +151,7 @@ export const deleteEvent = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Erro ao deletar evento.' });
   }
 };
+<<<<<<< HEAD
 
 // Obter participantes de um evento
 export const getEventParticipants = async (req: Request, res: Response) => {
@@ -162,3 +173,5 @@ export const getEventParticipants = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Erro ao buscar participantes' });
   }
 };
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499

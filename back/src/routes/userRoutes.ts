@@ -7,8 +7,11 @@ import {
   deleteUser,
   loginUser,
   updateSubscription,
+<<<<<<< HEAD
   editProfile,
   changePassword,
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 } from '../controllers/usercontroller';
 import { authenticateToken } from '../middlewares/authMiddleware';
 import {
@@ -47,6 +50,7 @@ router.delete('/users/:id', [authenticateToken, checkOwnership], deleteUser);
 // Rota para atualização da assinatura (tornar usuário um organizador)
 router.post('/users/:id/subscribe', authenticateToken, updateSubscription);
 
+<<<<<<< HEAD
 // Editar perfil (nome e email)
 router.put(
   '/users/:id/profile',
@@ -61,4 +65,6 @@ router.put(
   changePassword
 );
 
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 export default router;

@@ -152,7 +152,11 @@ export const loginUser = async (req: Request, res: Response) => {
       { expiresIn: '1h' }
     );
 
+<<<<<<< HEAD
     res.json({ token, id: user.id });
+=======
+    res.json({ token });
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   } catch (error) {
     console.error('❌ Erro no login:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -180,6 +184,7 @@ export const updateSubscription = async (
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+<<<<<<< HEAD
 
 // Editar perfil (nome e email)
 export const editProfile = async (
@@ -257,3 +262,5 @@ export const changePassword = async (
     res.status(500).json({ error: "Erro interno do servidor" });
   }
 };
+=======
+>>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
