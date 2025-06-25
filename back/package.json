@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "seed": "ts-node scripts/seed-users.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

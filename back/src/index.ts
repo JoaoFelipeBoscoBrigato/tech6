@@ -14,7 +14,7 @@ const port = 3000;
 
 app.use(
   cors({
-    origin: 'http://localhost:5173', // Substitua pelo endereço do seu frontend
+    origin: ['http://localhost:5173', 'http://localhost:4173'], // Aceita ambas as portas
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Se estiver lidando com cookies ou sessões
     optionsSuccessStatus: 204,
@@ -29,6 +29,10 @@ app.use(userRoutes);
 app.use(eventsRoutes);
 app.use(SignatureRouter);
 app.use(RegistrationRouter);
+
+app.get('/', (req, res) => {
+  res.send('API está online!');
+});
 
 sequelize
   .sync({ alter: true }) // Sincroniza o banco de dados
