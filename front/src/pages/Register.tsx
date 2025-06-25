@@ -25,12 +25,12 @@ export default function Register() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
+
     // Limpar erro geral quando o usuário começar a corrigir
     if (erro) {
       setErro('');
     }
-    
+
     // Validar email em tempo real
     if (name === 'email') {
       if (value && !validarEmail(value)) {
@@ -54,14 +54,19 @@ export default function Register() {
     // Validar senha em tempo real
     if (name === 'password') {
       if (value && !validarSenha(value)) {
-        setPasswordError('A senha deve conter pelo menos uma letra maiúscula, um número, um caractere especial e ter mais de 6 dígitos');
+        setPasswordError(
+          'A senha deve conter pelo menos uma letra maiúscula, um número, um caractere especial e ter mais de 6 dígitos'
+        );
       } else {
         setPasswordError('');
       }
       // Revalidar confirmação de senha quando a senha principal muda
       if (formData.confirmPassword && value !== formData.confirmPassword) {
         setConfirmPasswordError('As senhas não coincidem');
-      } else if (formData.confirmPassword && value === formData.confirmPassword) {
+      } else if (
+        formData.confirmPassword &&
+        value === formData.confirmPassword
+      ) {
         setConfirmPasswordError('');
       }
     }
@@ -86,16 +91,16 @@ export default function Register() {
   const validarSenha = (senha: string) => {
     // Verificar se tem mais de 6 dígitos
     if (senha.length <= 6) return false;
-    
+
     // Verificar se tem pelo menos uma letra maiúscula
     if (!/[A-Z]/.test(senha)) return false;
-    
+
     // Verificar se tem pelo menos um número
     if (!/\d/.test(senha)) return false;
-    
+
     // Verificar se tem pelo menos um caractere especial
     if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(senha)) return false;
-    
+
     return true;
   };
 
@@ -111,17 +116,22 @@ export default function Register() {
     if (!cpf) return setErro('Please enter your CPF.');
     if (!password) return setErro('Please enter your password.');
     if (!confirmPassword) return setErro('Please confirm your password.');
-    if (!validarEmail(email)) return setErro('O email deve terminar com @gmail.com');
-    
+    if (!validarEmail(email))
+      return setErro('O email deve terminar com @gmail.com');
+
     // Validar CPF usando a mesma lógica da validação em tempo real
     const cpfNumeros = cpf.replace(/\D/g, '');
-    if (cpfNumeros.length !== 11) return setErro('O CPF deve ter exatamente 11 números');
-    
-    if (!validarSenha(password)) return setErro('A senha deve conter pelo menos uma letra maiúscula, um número, um caractere especial e ter mais de 6 dígitos');
+    if (cpfNumeros.length !== 11)
+      return setErro('O CPF deve ter exatamente 11 números');
+
+    if (!validarSenha(password))
+      return setErro(
+        'A senha deve conter pelo menos uma letra maiúscula, um número, um caractere especial e ter mais de 6 dígitos'
+      );
     if (password !== confirmPassword) return setErro('As senhas não coincidem');
 
     try {
-      await axios.post('http://localhost/api/users', {
+      await axios.post('/api/users', {
         name,
         email,
         cpf,
@@ -190,7 +200,9 @@ export default function Register() {
             data-cy="email-input"
           />
           {emailError && (
-            <span className="register-field-error" data-cy="email-error">{emailError}</span>
+            <span className="register-field-error" data-cy="email-error">
+              {emailError}
+            </span>
           )}
           {(erro === 'Please enter your email.' ||
             erro === 'O email deve terminar com @gmail.com') && (
@@ -213,7 +225,9 @@ export default function Register() {
             data-cy="cpf-input"
           />
           {cpfError && (
-            <span className="register-field-error" data-cy="cpf-error">{cpfError}</span>
+            <span className="register-field-error" data-cy="cpf-error">
+              {cpfError}
+            </span>
           )}
         </div>
 
@@ -232,7 +246,9 @@ export default function Register() {
             data-cy="password-input"
           />
           {passwordError && (
-            <span className="register-field-error" data-cy="password-error">{passwordError}</span>
+            <span className="register-field-error" data-cy="password-error">
+              {passwordError}
+            </span>
           )}
         </div>
 
@@ -250,7 +266,12 @@ export default function Register() {
             placeholder="Confirme sua senha"
           />
           {confirmPasswordError && (
-            <span className="register-field-error" data-cy="confirm-password-error">{confirmPasswordError}</span>
+            <span
+              className="register-field-error"
+              data-cy="confirm-password-error"
+            >
+              {confirmPasswordError}
+            </span>
           )}
         </div>
 

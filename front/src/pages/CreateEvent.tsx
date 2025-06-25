@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import './CreateEvent.css';
 
 export default function CreateEvent() {
@@ -60,16 +60,12 @@ export default function CreateEvent() {
         formData.append('image', form.image);
       }
 
-      const response = await axios.post(
-        'http://localhost/api/events',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.post('/events', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       console.log('Evento criado:', response.data);
       navigate('/home');

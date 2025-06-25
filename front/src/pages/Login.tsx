@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
@@ -35,17 +35,16 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post('http://localhost/api/users/login', {
+      const response = await api.post('/users/login', {
         email,
         password: senha,
       });
-
-      const { token } = response.data;
+      const { token, id } = response.data as { token: string; id: string };
       const payload = JSON.parse(atob(token.split('.')[1]));
 
       localStorage.setItem('token', token);
       localStorage.setItem('userType', payload.type);
-      localStorage.setItem('userId', response.data.id);
+      localStorage.setItem('userId', id);
 
       navigate('/home');
     } catch (err: any) {

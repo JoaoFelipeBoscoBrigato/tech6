@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { api } from '../api/api';
+import api from '../services/api';
 import './EventDetails.css';
 import React from 'react';
 
@@ -31,7 +30,6 @@ export default function EventDetails() {
   const navigate = useNavigate();
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const [participating, setParticipating] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [registrationError, setRegistrationError] = useState('');
@@ -67,15 +65,10 @@ export default function EventDetails() {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await axios.get<Event>(
-          `http://localhost/api/events/${id}`
-        );
+        const response = await api.get<Event>(`/events/${id}`);
         setEvent(response.data);
       } catch (err) {
         console.error('Erro ao carregar evento:', err);
-        setError(
-          'Erro ao carregar detalhes do evento. Por favor, tente novamente mais tarde.'
-        );
       } finally {
         setLoading(false);
       }
@@ -113,8 +106,8 @@ export default function EventDetails() {
       }
 
       // Fazer a chamada para a API de registro
-      await axios.post(
-        `http://localhost/api/events/${id}/register`,
+      await api.post(
+        `/events/${id}/register`,
         {},
         {
           headers: {
@@ -125,9 +118,7 @@ export default function EventDetails() {
 
       alert('Inscrição realizada com sucesso!');
       // Atualizar o estado do evento para refletir a nova inscrição
-      const updatedEvent = await axios.get<Event>(
-        `http://localhost/api/events/${id}`
-      );
+      const updatedEvent = await api.get<Event>(`/events/${id}`);
       setEvent(updatedEvent.data);
       // Atualizar a lista de participantes automaticamente
       await fetchParticipants();
@@ -165,7 +156,7 @@ export default function EventDetails() {
   const handleUpdateEvent = async () => {
     if (!event) return;
     try {
-      await axios.put(`http://localhost/api/events/${event.id}`, editForm, {
+      await api.put(`/events/${event.id}`, editForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEditMode(false);
@@ -178,7 +169,7 @@ export default function EventDetails() {
   const handleDeleteEvent = async () => {
     if (!event) return;
     try {
-      await axios.delete(`http://localhost/api/events/${event.id}`, {
+      await api.delete(`/events/${event.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDeleteDialog(false);
@@ -203,7 +194,7 @@ export default function EventDetails() {
     );
   }
 
-  if (error || !event) {
+  if (!event) {
     return (
       <div className="event-details-container">
         <div className="event-details-content">
@@ -222,7 +213,7 @@ export default function EventDetails() {
                   d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <p>{error || 'Evento não encontrado'}</p>
+              <p>Evento não encontrado</p>
               <button
                 onClick={() => navigate('/home')}
                 className="event-details-button event-details-button-primary"
@@ -246,7 +237,7 @@ export default function EventDetails() {
 
   // Construir a URL completa da imagem
   const imageUrl = event.image_url
-    ? `http://localhost/api${event.image_url}`
+    ? `${import.meta.env.VITE_API_URL}${event.image_url}`
     : null;
 
   return (
@@ -339,7 +330,7 @@ export default function EventDetails() {
               <div className="event-details-organizer-info">
                 {event.organizer.avatar_url ? (
                   <img
-                    src={`http://localhost/api${event.organizer.avatar_url}`}
+                    src={`${import.meta.env.VITE_API_URL}${event.organizer.avatar_url}`}
                     alt={event.organizer.name}
                     className="event-details-organizer-avatar"
                     onError={(e) => {

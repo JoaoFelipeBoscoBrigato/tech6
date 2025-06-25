@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import EventCard from '../components/EventCard';
 import './Home.css';
 
@@ -31,7 +31,7 @@ export default function Home() {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get<Event[]>('http://localhost/api/events');
+      const response = await api.get<Event[]>('/events');
       setEvents(response.data);
     } catch (err) {
       setError('Erro ao carregar eventos');

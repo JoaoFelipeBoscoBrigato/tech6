@@ -19,6 +19,7 @@ app.use(
       'http://localhost:4173',
       'http://localhost:80',
       'http://localhost',
+      'https://meuapp.local',
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
