@@ -11,11 +11,8 @@ export default function Login() {
     senha: '',
   });
   const [erro, setErro] = useState('');
-<<<<<<< HEAD
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-=======
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +21,6 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErro('');
-<<<<<<< HEAD
     setEmailError('');
     setPasswordError('');
 
@@ -36,13 +32,6 @@ export default function Login() {
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       setEmailError('Invalid email format');
       return setErro('Invalid email format');
-=======
-
-    const { email, senha } = formData;
-
-    if (!email || !senha) {
-      return setErro('Preencha todos os campos.');
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
     }
 
     try {
@@ -60,7 +49,6 @@ export default function Login() {
 
       navigate('/home');
     } catch (err: any) {
-<<<<<<< HEAD
       if (
         err.response &&
         err.response.data &&
@@ -72,12 +60,6 @@ export default function Login() {
         setErro(err.response?.data?.error || 'Login error');
       } else {
         setErro('Unexpected error');
-=======
-      if (axios.isAxiosError(err)) {
-        setErro(err.response?.data?.error || 'Erro ao fazer login.');
-      } else {
-        setErro('Erro inesperado.');
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
       }
     }
   };
@@ -94,13 +76,9 @@ export default function Login() {
           className="login-input"
           value={formData.email}
           onChange={handleChange}
-<<<<<<< HEAD
           data-cy="email-input"
         />
         {emailError && <span data-cy="email-error">{emailError}</span>}
-=======
-        />
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 
         <input
           type="password"
@@ -109,7 +87,6 @@ export default function Login() {
           className="login-input"
           value={formData.senha}
           onChange={handleChange}
-<<<<<<< HEAD
           data-cy="password-input"
         />
         {passwordError && <span data-cy="password-error">{passwordError}</span>}
@@ -121,22 +98,11 @@ export default function Login() {
         )}
 
         <button type="submit" className="login-button" data-cy="login-button">
-=======
-        />
-
-        {erro && <p className="login-error">{erro}</p>}
-
-        <button type="submit" className="login-button">
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
           Entrar
         </button>
 
         <div className="login-links">
-<<<<<<< HEAD
           <Link to="/register" className="login-link" data-cy="register-link">
-=======
-          <Link to="/register" className="login-link">
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
             Não tem uma conta? Registre-se
           </Link>
         </div>

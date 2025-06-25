@@ -13,16 +13,12 @@ interface DecodedToken {
 const SignaturePage: React.FC = () => {
   const [userId, setUserId] = useState<number | null>(null);
   const [plan, setPlan] = useState<'mensal' | 'anual'>('mensal');
-<<<<<<< HEAD
   const [paymentMethod, setPaymentMethod] = useState<'credit-card' | 'pix'>(
     'credit-card'
   );
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
-=======
-  const [loading, setLoading] = useState(false);
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,7 +43,6 @@ const SignaturePage: React.FC = () => {
     if (!userId) return;
 
     setLoading(true);
-<<<<<<< HEAD
     setSuccess('');
     setError('');
     try {
@@ -65,11 +60,6 @@ const SignaturePage: React.FC = () => {
         return;
       }
 
-=======
-    try {
-      const token = localStorage.getItem('token');
-
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
       await axios.post(
         `${import.meta.env.VITE_API_URL}/signatures`,
         { user_id: userId, plan },
@@ -82,7 +72,6 @@ const SignaturePage: React.FC = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-<<<<<<< HEAD
       setSuccess('Signature created successfully');
       setTimeout(() => {
         alert('Assinatura realizada com sucesso! Você agora é um organizador.');
@@ -90,11 +79,6 @@ const SignaturePage: React.FC = () => {
       }, 1000);
     } catch (error) {
       setError('Invalid credit card number');
-=======
-      alert('Assinatura realizada com sucesso! Você agora é um organizador.');
-      navigate('/home');
-    } catch (error) {
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
       console.error('Erro ao assinar:', error);
       alert('Erro ao assinar. Tente novamente.');
     } finally {
@@ -113,7 +97,6 @@ const SignaturePage: React.FC = () => {
 
         <div className="signature-plan-group">
           <label className="signature-label">Escolha seu plano:</label>
-<<<<<<< HEAD
           <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
             <button
               type="button"
@@ -164,26 +147,12 @@ const SignaturePage: React.FC = () => {
             {error}
           </p>
         )}
-=======
-          <select
-            value={plan}
-            onChange={(e) => setPlan(e.target.value as 'mensal' | 'anual')}
-            className="signature-select"
-          >
-            <option value="mensal">Mensal - R$ 19,90</option>
-            <option value="anual">Anual - R$ 199,90 (Economize 16%)</option>
-          </select>
-        </div>
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
 
         <button
           onClick={handleSubscribe}
           disabled={loading}
           className="signature-button"
-<<<<<<< HEAD
           data-cy="create-signature-button"
-=======
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
         >
           {loading ? 'Processando...' : 'Assinar agora'}
         </button>
@@ -211,7 +180,6 @@ const SignaturePage: React.FC = () => {
             </li>
           </ul>
         </div>
-<<<<<<< HEAD
 
         <div className="signature-back-container">
           <button
@@ -223,8 +191,6 @@ const SignaturePage: React.FC = () => {
             Voltar ao Home
           </button>
         </div>
-=======
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
       </div>
     </div>
   );

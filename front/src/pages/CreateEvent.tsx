@@ -44,14 +44,11 @@ export default function CreateEvent() {
     const token = localStorage.getItem('token');
     if (!token) return setErro('Usuário não autenticado.');
 
-<<<<<<< HEAD
     if (!form.name || !form.description || !form.date || !form.location) {
       setErro('Preencha todos os campos obrigatórios.');
       return;
     }
 
-=======
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
     try {
       const formData = new FormData();
       formData.append('name', form.name);
@@ -103,10 +100,7 @@ export default function CreateEvent() {
             onChange={handleChange}
             placeholder="Digite o nome do evento"
             required
-<<<<<<< HEAD
             data-cy="title-input"
-=======
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
           />
         </div>
 
@@ -122,10 +116,7 @@ export default function CreateEvent() {
             onChange={handleChange}
             placeholder="Descreva o seu evento"
             required
-<<<<<<< HEAD
             data-cy="description-input"
-=======
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
           />
         </div>
 
@@ -141,10 +132,7 @@ export default function CreateEvent() {
             value={form.date}
             onChange={handleChange}
             required
-<<<<<<< HEAD
             data-cy="date-input"
-=======
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
           />
         </div>
 
@@ -161,10 +149,7 @@ export default function CreateEvent() {
             onChange={handleChange}
             placeholder="Digite o local do evento"
             required
-<<<<<<< HEAD
             data-cy="location-input"
-=======
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
           />
         </div>
 
@@ -178,10 +163,7 @@ export default function CreateEvent() {
             accept="image/*"
             className="create-event-file-input"
             onChange={handleFileChange}
-<<<<<<< HEAD
             data-cy="image-input"
-=======
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
           />
           {previewUrl && (
             <div className="create-event-preview">
@@ -194,7 +176,6 @@ export default function CreateEvent() {
           )}
         </div>
 
-<<<<<<< HEAD
         {erro && (
           <p className="create-event-error" data-cy="error-message">
             {erro}
@@ -216,13 +197,6 @@ export default function CreateEvent() {
         >
           Voltar para o Home
         </button>
-=======
-        {erro && <p className="create-event-error">{erro}</p>}
-
-        <button type="submit" className="create-event-button">
-          Criar Evento
-        </button>
->>>>>>> ed3a751d1602e4f18ae42998c040ef3798320499
       </form>
     </div>
   );
