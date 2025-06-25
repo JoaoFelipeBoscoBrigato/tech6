@@ -61,7 +61,7 @@ export default function CreateEvent() {
       }
 
       const response = await axios.post(
-        'http://localhost:3000/events',
+        'http://localhost/api/events',
         formData,
         {
           headers: {

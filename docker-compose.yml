@@ -4,14 +4,20 @@ services:
     container_name: mysql_db
     restart: always
     environment:
-      MYSQL_DATABASE: tech5br
-      MYSQL_ROOT_PASSWORD: '2005'
+      MYSQL_DATABASE: ${DB_NAME:-tech5br}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-2005}
+      MYSQL_USER: ${DB_USER:-root}
     ports:
-      - '3307:3306'
+      - '${DB_PORT:-3307}:3306'
     volumes:
       - db_data:/var/lib/mysql
+      - ./back/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - tech6net
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      timeout: 20s
+      retries: 10
 
   backend:
     build: ./back
@@ -20,32 +26,62 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: '2005'
-      DB_NAME: tech5br
-      JWT_SECRET: 'SegredoSuperSecreto'
+      DB_USER: ${DB_USER:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-2005}
+      DB_NAME: ${DB_NAME:-tech5br}
+      JWT_SECRET: ${JWT_SECRET:-SegredoSuperSecreto}
+      NODE_ENV: development
     ports:
-      - '3000:3000'
+      - '${BACKEND_PORT:-3000}:3000'
     volumes:
       - ./back/uploads:/app/uploads
+      - /app/node_modules
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - tech6net
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   frontend:
     build: ./front
     container_name: frontend
     restart: always
+    environment:
+      VITE_API_URL: http://localhost/api
     ports:
-      - '4173:4173'
+      - '${FRONTEND_PORT:-4173}:4173'
+    volumes:
+      - ./front:/app
+      - /app/node_modules
     depends_on:
+      - backend
+    networks:
+      - tech6net
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_proxy
+    restart: always
+    ports:
+      - '${NGINX_PORT:-80}:80'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./back/uploads:/var/www/uploads
+    depends_on:
+      - frontend
       - backend
     networks:
       - tech6net
 
 volumes:
   db_data:
+    driver: local
 
 networks:
   tech6net:

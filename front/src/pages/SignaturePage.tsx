@@ -61,7 +61,7 @@ const SignaturePage: React.FC = () => {
       }
 
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/signature`,
+        `${import.meta.env.VITE_API_URL}/signatures`,
         { user_id: userId, plan },
         { headers: { Authorization: `Bearer ${token}` } }
       );

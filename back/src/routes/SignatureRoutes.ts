@@ -11,7 +11,7 @@ import { authenticateToken } from '../middlewares/authMiddleware'; // Importando
 const SignatureRouter = express.Router();
 
 // Rota para criar uma nova assinatura - Usuário autenticado
-SignatureRouter.post('/signature', authenticateToken, createSignature); // Middleware de autenticação
+SignatureRouter.post('/', authenticateToken, createSignature); // Middleware de autenticação
 
 // Rota para listar assinaturas de um usuário - Usuário autenticado
 SignatureRouter.get(
@@ -21,10 +21,10 @@ SignatureRouter.get(
 ); // Middleware de autenticação
 
 // Rota para atualizar uma assinatura (renovação) - Usuário autenticado
-SignatureRouter.put('/signature/:id', authenticateToken, updateSignature); // Middleware de autenticação
+SignatureRouter.put('/:id', authenticateToken, updateSignature); // Middleware de autenticação
 
 // Rota para cancelar uma assinatura - Usuário autenticado
-SignatureRouter.delete('/signature/:id', authenticateToken, cancelSignature); // Middleware de autenticação
+SignatureRouter.delete('/:id', authenticateToken, cancelSignature); // Middleware de autenticação
 
 // Rota para verificar o status da assinatura - Usuário autenticado
 SignatureRouter.get(

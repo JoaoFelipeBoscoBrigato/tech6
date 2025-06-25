@@ -48,6 +48,10 @@ export const cpfValidation = (
 ) => {
   const { cpf } = req.body;
 
+  if (!cpf) {
+    return res.status(400).json({ error: 'CPF é obrigatório' });
+  }
+
   if (!validateCPF(cpf)) {
     return res.status(400).json({ error: 'CPF inválido' });
   }
@@ -62,6 +66,10 @@ export const passwordValidation = (
   next: NextFunction
 ) => {
   const { password } = req.body;
+
+  if (!password) {
+    return res.status(400).json({ error: 'Senha é obrigatória' });
+  }
 
   if (!validatePasswordStrength(password)) {
     return res.status(400).json({
@@ -80,6 +88,11 @@ export const emailValidation = (
   next: NextFunction
 ) => {
   const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: 'E-mail é obrigatório' });
+  }
+
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   if (!emailRegex.test(email)) {

@@ -51,7 +51,7 @@ export default function EventDetails() {
     const fetchEventDetails = async () => {
       try {
         const response = await axios.get<Event>(
-          `http://localhost:3000/events/${id}`
+          `http://localhost/api/events/${id}`
         );
         setEvent(response.data);
       } catch (err) {
@@ -113,7 +113,7 @@ export default function EventDetails() {
 
       // Fazer a chamada para a API de registro
       await axios.post(
-        `http://localhost:3000/events/${id}/register`,
+        `http://localhost/api/events/${id}/register`,
         {},
         {
           headers: {
@@ -125,7 +125,7 @@ export default function EventDetails() {
       alert('Inscrição realizada com sucesso!');
       // Atualizar o estado do evento para refletir a nova inscrição
       const updatedEvent = await axios.get<Event>(
-        `http://localhost:3000/events/${id}`
+        `http://localhost/api/events/${id}`
       );
       setEvent(updatedEvent.data);
     } catch (err: unknown) {
@@ -162,7 +162,7 @@ export default function EventDetails() {
   const handleUpdateEvent = async () => {
     if (!event) return;
     try {
-      await axios.put(`http://localhost:3000/events/${event.id}`, editForm, {
+      await axios.put(`http://localhost/api/events/${event.id}`, editForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEditMode(false);
@@ -175,7 +175,7 @@ export default function EventDetails() {
   const handleDeleteEvent = async () => {
     if (!event) return;
     try {
-      await axios.delete(`http://localhost:3000/events/${event.id}`, {
+      await axios.delete(`http://localhost/api/events/${event.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDeleteDialog(false);
@@ -243,7 +243,7 @@ export default function EventDetails() {
 
   // Construir a URL completa da imagem
   const imageUrl = event.image_url
-    ? `http://localhost:3000${event.image_url}`
+    ? `http://localhost/api${event.image_url}`
     : null;
 
   return (
@@ -336,7 +336,7 @@ export default function EventDetails() {
               <div className="event-details-organizer-info">
                 {event.organizer.avatar_url ? (
                   <img
-                    src={`http://localhost:3000${event.organizer.avatar_url}`}
+                    src={`http://localhost/api${event.organizer.avatar_url}`}
                     alt={event.organizer.name}
                     className="event-details-organizer-avatar"
                     onError={(e) => {

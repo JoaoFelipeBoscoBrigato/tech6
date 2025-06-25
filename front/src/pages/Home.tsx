@@ -31,7 +31,7 @@ export default function Home() {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get<Event[]>('http://localhost:3000/events');
+      const response = await axios.get<Event[]>('http://localhost/api/events');
       setEvents(response.data);
     } catch (err) {
       setError('Erro ao carregar eventos');

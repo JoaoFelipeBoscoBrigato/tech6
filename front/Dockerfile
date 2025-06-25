@@ -1,12 +1,18 @@
-FROM node:20 AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+FROM node:20-alpine
 
-FROM node:20 AS prod
 WORKDIR /app
-COPY --from=build /app /app
-EXPOSE 5173
-CMD ["npm", "run", "preview", "--", "--host"] 
+
+# Copiar arquivos de dependências
+COPY package*.json ./
+
+# Instalar dependências
+RUN npm ci
+
+# Copiar código fonte
+COPY . .
+
+# Expor porta
+EXPOSE 4173
+
+# Comando para rodar em modo de desenvolvimento
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "4173"] 

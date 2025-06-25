@@ -53,11 +53,12 @@ export default function Register() {
     if (password !== confirmPassword) return setErro('Passwords do not match');
 
     try {
-      await axios.post('http://localhost:3000/users', {
+      await axios.post('http://localhost/api/users', {
         name,
         email,
         cpf,
-        password,
+        password: password,
+        type: 'usuario',
       });
       setSuccess('User registered successfully');
       setTimeout(() => {

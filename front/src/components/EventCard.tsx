@@ -32,7 +32,7 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
         <div className="event-card-image-container">
           {image_url ? (
             <img
-              src={`http://localhost:3000${image_url}`}
+              src={`http://localhost/api${image_url}`}
               alt={name}
               className="event-card-image"
             />
